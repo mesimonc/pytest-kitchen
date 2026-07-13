@@ -37,3 +37,19 @@ def test_dosage_just_one_unit_over_max_raises():
     """Boundary test: dosage exceeding max by the smallest margin still raises."""
     with pytest.raises(DosageError):
         calc_dosage(weight_kg=20.02, mg_per_kg=5, max_safe_mg=100)
+
+@pytest.mark.dosage
+@pytest.mark.skip(reason="Extreme low-weight neonatal dosing not yet supported")
+def test_dosage_for_extremely_low_weight_neonate():
+    """Test dosage calculation for neonates under 1kg (not yet implemented)."""
+    result = calc_dosage(weight_kg=0.5, mg_per_kg=2, max_safe_mg=1)
+    assert result == 1
+
+
+@pytest.mark.dosage
+@pytest.mark.xfail(reason="Known floating point precision issue with repeated small additions")
+def test_dosage_floating_point_precision_known_bug():
+    """Test that reveals a known floating-point precision bug with tiny weights."""
+    weight = 0.1 + 0.1 + 0.1  # classic float precision trap: not exactly 0.3
+    result = calc_dosage(weight_kg=weight, mg_per_kg=1, max_safe_mg=100)
+    assert result == 0.3
