@@ -59,3 +59,13 @@ def test_order_timed_out_after_15_minutes(new_order):
     with freeze_time(datetime.now() + timedelta(minutes=16)):
         new_order.check_timeout()
     assert new_order.status == "cancelled"
+
+@pytest.mark.order
+def test_check_timeout_does_nothing_if_not_created(new_order):
+    """Test that check_timeout has no effect once the order has left 'created' status."""
+    new_order.transition_to("accepted")
+
+    with freeze_time(datetime.now() + timedelta(minutes=999)):
+        new_order.check_timeout()
+
+    assert new_order.status == "accepted"
