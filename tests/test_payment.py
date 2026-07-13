@@ -1,12 +1,13 @@
 import sys
 import os
 from unittest.mock import MagicMock
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from payment import PaymentProcessor
 
-
+@pytest.mark.payment
 def test_first_callback_charges_once():
     """Test that the first callback for a payment_id triggers a charge."""
     fake_gateway = MagicMock()
@@ -17,7 +18,7 @@ def test_first_callback_charges_once():
     # Fill in the argument the gateway.charge method should have been called with
     fake_gateway.charge.assert_called_once_with(50)
 
-
+@pytest.mark.payment
 def test_duplicate_callback_does_not_charge_twice():
     """Test that a duplicate callback with the same payment_id is idempotent."""
     fake_gateway = MagicMock()
