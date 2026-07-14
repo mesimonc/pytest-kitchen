@@ -5,11 +5,13 @@ freezegun==1.5.5
 hypothesis==6.156.6
 iniconfig==2.3.0
 packaging==26.2
+platformdirs==4.10.0
 pluggy==1.6.0
 Pygments==2.20.0
 pytest==9.1.1
 pytest-cov==7.1.0
 python-dateutil==2.9.0.post0
+python-discovery==1.4.4
 ruff==0.15.21
 six==1.17.0
 sortedcontainers==2.4.0
