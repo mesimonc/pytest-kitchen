@@ -21,7 +21,6 @@ pytest-cov==7.1.0
 python-dateutil==2.9.0.post0
 python-discovery==1.4.4
 python-dotenv==1.2.2
-pywin32==312
 requests==2.34.2
 ruff==0.15.21
 six==1.17.0
