@@ -5,7 +5,6 @@ import threading
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from inventory import Inventory
-import pytest
 
 
 def test_concurrent_purchases_can_oversell_without_lock():
