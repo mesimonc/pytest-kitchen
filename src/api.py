@@ -30,7 +30,13 @@ def create_order(order: OrderCreate):
     return orders_db[order_id]
 
 
-@app.get("/orders/{order_id}", response_model=OrderOut)
+# @app.get("/orders/{order_id}", response_model=OrderOut)
+# def get_order(order_id: int):
+#     if order_id not in orders_db:
+#         raise HTTPException(status_code=404, detail="Order not found")
+#     return orders_db[order_id]
+
+@app.get("/orders/{order_id}", response_model=OrderOut, responses={404: {"description": "Order not found"}})
 def get_order(order_id: int):
     if order_id not in orders_db:
         raise HTTPException(status_code=404, detail="Order not found")
